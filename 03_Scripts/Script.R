@@ -103,3 +103,47 @@ grafica_edada_muertes
 jpeg("grafica de muertes por rangos de edad.jpeg", width = 750, height = 350)
 grafica_edada_muertes
 dev.off()
+
+# 5. Hacer una gráfica apilada de hospitalizados por covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
+
+base_3 <- select(datos_covid_gto, EDAD, FECHA_INGRESO, TIPO_PACIENTE)
+base_3 <- filter(base_3, TIPO_PACIENTE == 2)
+
+edades_h_18_29 <- filter(base_3, EDAD >= 18 & EDAD <= 29)
+edades_h_18_29 <- mutate(edades_h_18_29, rango_edad = "18-29")
+
+edades_h_30_39 <- filter(base_3, EDAD >= 30 & EDAD <= 39)
+edades_h_30_39 <- mutate(edades_h_30_39, rango_edad = "30-39")
+
+edades_h_40_49 <- filter(base_3, EDAD >= 40 & EDAD <= 49)
+edades_h_40_49 <- mutate(edades_h_40_49, rango_edad = "40-49")
+
+edades_h_50_59 <- filter(base_3, EDAD >= 50 & EDAD <= 59)
+edades_h_50_59 <- mutate(edades_h_50_59, rango_edad = "50-59")
+
+edades_h_60_69 <- filter(base_3, EDAD >= 60 & EDAD <= 69)
+edades_h_60_69 <- mutate(edades_h_60_69, rango_edad = "60-69")
+
+edades_h_70 <- filter(base_3, EDAD >= 70)
+edades_h_70 <- mutate(edades_h_70, rango_edad = "70")
+
+base_h_re <- rbind(edades_h_18_29, edades_h_30_39, edades_h_40_49,
+                   edades_h_50_59, edades_h_60_69, edades_h_70)
+
+grafica_hospitalizaciones_edad <- ggplot(base_h_re, aes(x=FECHA_INGRESO, 
+                                                        y=EDAD,
+                                                        fill=rango_edad)) +
+  geom_bar(position="stack", stat="identity") + 
+  ggtitle("Hospitalizaciones por COVID por rangos de edades para el estado de Guanajuato") + 
+  labs(x="Tiempo", y="Hospitalizaciones") +
+  labs(fill="Rangos de Edad") +
+  theme(plot.title = element_text(hjust = 0.5))+
+  theme(panel.background = element_rect(fill = "white"), 
+        axis.line = element_line(colour = "black", size = 1)) +
+  scale_fill_viridis(discrete = T) 
+
+grafica_hospitalizaciones_edad
+
+jpeg("grafica de hospitalizaciones por rangos de edad.jpeg", width = 750, height = 350)
+grafica_hospitalizaciones_edad
+dev.off()

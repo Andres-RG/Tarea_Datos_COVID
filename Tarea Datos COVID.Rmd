@@ -20,6 +20,8 @@ output: html_document
 
 5. Hacer una gráfica apilada de hospitalizados por covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
 
+![Grafica 3](04_Output/Plots/grafica de hospitalizaciones por rangos de edad.jpeg)
+
 6.  Hacer una gráfica de hospitalizados totales positivos por fecha de inicio de síntomas.
 
 7. Infiere cuál podría ser el R_o a partir de los datos al inicio de la pandemia.
