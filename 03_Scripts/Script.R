@@ -1,31 +1,53 @@
 library(ggplot2)
 library(tidyverse)
-source("02_Functions/Functions.R")
+
 
 #1 Hacer una gráfica apilada de casos positivos a covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
 
 base_1 <- select(datos_covid_gto, 
                  c(EDAD, FECHA_INGRESO, CLASIFICACION_FINAL))
-edades <- filter(base_1, EDAD >= 18 & CLASIFICACION_FINAL == 3)
-edades <- mutate(edades, rango_edad = EDAD)
 
-for(i in 1:length(edades$EDAD) ) {
-  if (edades$EDAD[[i]] >= 18 & edades$EDAD[[i]] <=29){
-    edades$rango_edad[[i]] <- c("18-29")
-  } else if (edades$EDAD[[i]] >= 30 & edades$EDAD[[i]] <=39){
-    edades$rango_edad[[i]] <- c("30-39")
-  } else if (edades$EDAD[[i]] >= 40 & edades$EDAD[[i]] <=49){
-    edades$rango_edad[[i]] <- c("40-49")
-  } else if (edades$EDAD[[i]] >= 50 & edades$EDAD[[i]] <=59){
-    edades$rango_edad[[i]] <- c("50-59")
-  } else if (edades$EDAD[[i]] >= 60 & edades$EDAD[[i]] <=69){
-    edades$rango_edad[[i]] <- c("60-69")
-  } else if (edades$EDAD[[i]] >= 70){
-    edades$rango_edad[[i]] <- c("+70")
-  } 
-}
+edades_18_29 <- filter(base_1, EDAD >= 18 & EDAD <= 29 & 
+                         CLASIFICACION_FINAL == 1 | 
+                         CLASIFICACION_FINAL == 2 | 
+                         CLASIFICACION_FINAL == 3)
+edades_18_29 <- mutate(edades_18_29, rango_edad = "18-29")
 
-grafica_rangos_edad <- ggplot(edades, aes(x=FECHA_INGRESO, y=EDAD, fill = rango_edad)) + 
+edades_30_39 <- filter(base_1, EDAD >= 30 & EDAD <= 39 &
+                         CLASIFICACION_FINAL == 1 | 
+                         CLASIFICACION_FINAL == 2 | 
+                         CLASIFICACION_FINAL == 3)
+edades_30_39 <- mutate(edades_18_29, rango_edad = "30-39")
+
+edades_40_49 <- filter(base_1, EDAD >= 40 & EDAD <= 49 &
+                         CLASIFICACION_FINAL == 1 | 
+                         CLASIFICACION_FINAL == 2 | 
+                         CLASIFICACION_FINAL == 3)
+edades_40_49 <- mutate(edades_18_29, rango_edad = "40-49")
+
+edades_50_59 <- filter(base_1, EDAD >= 50 & EDAD <= 59 & 
+                         CLASIFICACION_FINAL == 1 | 
+                         CLASIFICACION_FINAL == 2 | 
+                         CLASIFICACION_FINAL == 3)
+edades_50_59 <- mutate(edades_18_29, rango_edad = "50-59")
+
+edades_60_69 <- filter(base_1, EDAD >= 60 & EDAD <= 69 & 
+                         CLASIFICACION_FINAL == 1 | 
+                         CLASIFICACION_FINAL == 2 | 
+                         CLASIFICACION_FINAL == 3)
+edades_60_69 <- mutate(edades_18_29, rango_edad = "60-69")
+
+edades_70 <- filter(base_1, EDAD >= 70 &  
+                      CLASIFICACION_FINAL == 1 | 
+                      CLASIFICACION_FINAL == 2 | 
+                      CLASIFICACION_FINAL == 3)
+edades_70 <- mutate(edades_18_29, rango_edad = "70")
+
+
+base_re <- rbind(edades_18_29, edades_30_39, edades_40_49, 
+                 edades_50_59, edades_60_69, edades_70)
+
+grafica_rangos_edad <- ggplot(base_re, aes(x=FECHA_INGRESO, y=EDAD, fill = rango_edad)) + 
   geom_bar(position="stack", stat="identity") + 
   ggtitle("Casos positivos a covid por rangos de edades para el estado de Guanajuato") + 
   labs(x="Tiempo", y="Casos") +
