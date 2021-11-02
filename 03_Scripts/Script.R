@@ -1,5 +1,8 @@
 library(ggplot2)
 library(tidyverse)
+source("02_Functions/Functions.R")
+
+#1 Hacer una gráfica apilada de casos positivos a covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
 
 base_1 <- select(datos_covid_gto, 
                  c(EDAD, FECHA_INGRESO, CLASIFICACION_FINAL))
@@ -35,4 +38,12 @@ grafica_rangos_edad <- ggplot(edades, aes(x=FECHA_INGRESO, y=EDAD, fill = rango_
 jpeg("grafica de rangos de edad.jpeg", width = 750, height = 350)
 grafica_rangos_edad
 dev.off()
-  
+
+
+# 3. Hacer una gráfica apilada de muertes por covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
+
+base_2 <- select(datos_covid_gto, EDAD, FECHA_INGRESO, FECHA_DEF)
+deaths <- base_2 %>% filter(!is.na(FECHA_DEF))
+edades_muertes <- c(deaths$EDAD)
+mxe <- rangos_edades(edades_muertes)
+deaths_re <- mutate(deaths, rango_edad=mxe)
