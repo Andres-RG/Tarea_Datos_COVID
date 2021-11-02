@@ -22,12 +22,17 @@ for(i in 1:length(edades$EDAD) ) {
   } 
 }
 
-ggplot(edades, aes(x=FECHA_INGRESO, y=EDAD, fill = rango_edad)) + 
+grafica_rangos_edad <- ggplot(edades, aes(x=FECHA_INGRESO, y=EDAD, fill = rango_edad)) + 
   geom_bar(position="stack", stat="identity") + 
   ggtitle("Casos positivos a covid por rangos de edades para el estado de Guanajuato") + 
-  labs(x="Tiempo", y="Casos") + 
+  labs(x="Tiempo", y="Casos") +
+  labs(fill="Rangos de Edad") +
   theme(plot.title = element_text(hjust = 0.5))+
   theme(panel.background = element_rect(fill = "white"), 
         axis.line = element_line(colour = "black", size = 1)) +
-  scale_fill_viridis(discrete = T)
+  scale_fill_viridis(discrete = T) 
+
+jpeg("grafica de rangos de edad.jpeg", width = 750, height = 350)
+grafica_rangos_edad
+dev.off()
   
