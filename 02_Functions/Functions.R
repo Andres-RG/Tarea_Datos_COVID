@@ -18,4 +18,5 @@ for(i in 1:length(vec) ) {
     vector[[i]] <- c(vector, "+70")
   } 
 }
+  print(paste(vector))
 }
