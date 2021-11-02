@@ -42,4 +42,4 @@ output: html_document
 
 15. Propón un modelo por compartimentos utilizando algunos de los datos, determina sus parámetros y sus ecuaciones diferenciales. Resuélvelo en R.
 
-![Diagrama de compartimentos](diagrama_COVID.png)
+![Diagrama de compartimentos](diagrama_compartimentos_COVID.png)
