@@ -1,48 +1,56 @@
 ---
 title: "Tarea Datos COVID"
+subtitle: "Modelaje de Enfermedades Infecciosas"
 author: "Luis Andrés Rojas García Exp. 279465"
-date: "1/11/2021"
-output: html_document
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:   
+  prettydoc::html_pretty: 
+    theme: cayman 
+    hightlight: github
+    toc: true
 ---
 
 
-1. Hacer una gráfica apilada de casos positivos a covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
+### 1. Hacer una gráfica apilada de casos positivos a covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
 
 ![Grafica 1](04_Output/Plots/grafica de rangos de edad.jpeg)
+<p>&nbsp;</p>
 
-2.  Hacer una gráfica de casos totales positivos por fecha de inicio de síntomas
+### 2. Hacer una gráfica de casos totales positivos por fecha de inicio de síntomas
 
-3. Hacer una gráfica apilada de muertes por covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
+### 3. Hacer una gráfica apilada de muertes por covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
 
 ![Grafica 2](04_Output/Plots/grafica de muertes por rangos de edad.jpeg)
+<p>&nbsp;</p>
 
-4.  Hacer una gráfica de muertes totales positivos por fecha de inicio de síntomas.
+### 4. Hacer una gráfica de muertes totales positivos por fecha de inicio de síntomas.
 
-5. Hacer una gráfica apilada de hospitalizados por covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
+### 5. Hacer una gráfica apilada de hospitalizados por covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
 
 ![Grafica 3](04_Output/Plots/grafica de hospitalizaciones por rangos de edad.jpeg)
+<p>&nbsp;</p>
 
-6.  Hacer una gráfica de hospitalizados totales positivos por fecha de inicio de síntomas.
+### 6. Hacer una gráfica de hospitalizados totales positivos por fecha de inicio de síntomas.
 
-7. Infiere cuál podría ser el R_o a partir de los datos al inicio de la pandemia.
+### 7. Infiere cuál podría ser el $R_0$ a partir de los datos al inicio de la pandemia.
 
-8. ¿Cuál es la probabilidad de que individuos positivos a covid sin comorbilidades sean hospitalizados por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
+### 8. ¿Cuál es la probabilidad de que individuos positivos a covid sin comorbilidades sean hospitalizados por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
 
-9. ¿Cuál es la probabilidad de que individuos positivos a covid con alguna comorbilidad sean hospitalizados por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
+### 9. ¿Cuál es la probabilidad de que individuos positivos a covid con alguna comorbilidad sean hospitalizados por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
 
-10. ¿Cuál es la probabilidad de que individuos positivos a covid sin comorbilidades sean intubados por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
+### 10. ¿Cuál es la probabilidad de que individuos positivos a covid sin comorbilidades sean intubados por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
 
-11. ¿Cuál es la probabilidad de que individuos positivos a covid con alguna comorbilidad sean intubados por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
+### 11. ¿Cuál es la probabilidad de que individuos positivos a covid con alguna comorbilidad sean intubados por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
 
-12. ¿Cuál es la probabilidad de que individuos positivos a covid sin comorbilidades fallezcan por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
+### 12. ¿Cuál es la probabilidad de que individuos positivos a covid sin comorbilidades fallezcan por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
 
-13. ¿Cuál es la probabilidad de que individuos positivos a covid con alguna comorbilidad fallezcan por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
+### 13. ¿Cuál es la probabilidad de que individuos positivos a covid con alguna comorbilidad fallezcan por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
 
-14. ¿Qué parámetros podrían modelar las respuestas a las preguntas 8-14 en un modelo por compartimentos?
+### 14. ¿Qué parámetros podrían modelar las respuestas a las preguntas 8-14 en un modelo por compartimentos?
 
-15. Propón un modelo por compartimentos utilizando algunos de los datos, determina sus parámetros y sus ecuaciones diferenciales. Resuélvelo en R.
+### 15. Propón un modelo por compartimentos utilizando algunos de los datos, determina sus parámetros y sus ecuaciones diferenciales. Resuélvelo en R.
 
-+ Supuestos: 
+#### Supuestos: 
 
 - Se asumen parámetros demográficos
 - La infección ocurre por interacciones con individuos infectados leves, hospitalizados e intubados
@@ -50,7 +58,12 @@ output: html_document
 - No hay heterogeneidad en los individuos suceptibles
 - La muerte por enfermedad es una variable
 
+#### Diagrama de Compartimentos
+
 ![Diagrama de compartimentos](diagrama_compartimentos_COVID.png)
+<p>&nbsp;</p>
+
+#### Parámetros
 
 Los parámetros de este modelo son:
 
@@ -70,6 +83,9 @@ Los parámetros de este modelo son:
 - $\delta _m$ : días en que un individuo intubado muere 
 - $\nu$ : tasa de nacimientos
 - $\mu _n$ : tasa de muerte natural
+<p>&nbsp;</p>
+
+#### Ecuaciones
 
 Las ecuaciones de este sistema son:
 $$\begin{array}{l}
