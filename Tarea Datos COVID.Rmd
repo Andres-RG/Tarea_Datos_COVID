@@ -47,18 +47,6 @@ $$R_0 = \frac{\beta + \alpha + \delta (p_h + (1-p_h)) + p_i \delta _i }{\mu _n +
 
 ![Probabilidad de hospitalizacion](04_Output/Plots/probabilidad de hospitalizacion.jpeg)
 
-### 9. ¿Cuál es la probabilidad de que individuos positivos a covid con alguna comorbilidad sean hospitalizados por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
-
-### 10. ¿Cuál es la probabilidad de que individuos positivos a covid sin comorbilidades sean intubados por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
-
-### 11. ¿Cuál es la probabilidad de que individuos positivos a covid con alguna comorbilidad sean intubados por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
-
-### 12. ¿Cuál es la probabilidad de que individuos positivos a covid sin comorbilidades fallezcan por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
-
-### 13. ¿Cuál es la probabilidad de que individuos positivos a covid con alguna comorbilidad fallezcan por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
-
-### 14. ¿Qué parámetros podrían modelar las respuestas a las preguntas 8-14 en un modelo por compartimentos?
-
 
 ### 15. Propón un modelo por compartimentos utilizando algunos de los datos, determina sus parámetros y sus ecuaciones diferenciales. Resuélvelo en R.
 
@@ -107,12 +95,41 @@ $$\begin{array}{l}
 \dot I_l = (1 - p_h) \delta I - \mu _n I_l - \gamma _r I_l \\
 \dot I_h =  p_h \delta I - p_i \delta _i I_h - (1-p_i) \gamma _h I_h - \mu _n I_h \\
 \dot I_i = p_i \delta _i I_h - \mu \delta m I_i - (1- \mu ) \gamma _i I_i - \mu _n I_i \\
-\dot R = \gamma _r I_l + (1-p_i) \gamma _h I_h + (1- \mu ) \gamma _i I_i \\ 
+\dot R = \gamma _r I_l + (1-p_i) \gamma _h I_h + (1- \mu ) \gamma _i I_i - \mu _n R \\ 
 \dot M = \mu \delta m I_i
 \end{array}$$
 
 #### Resolverlas numéricamente
 
+```{r}
+modelo_covid <- function (t, state, parameters){
+  with(as.list(c(state, parameters)), {
+    
+    N <- S + E + I + Il + Ih + Ii + R + M
+    dS = nu - mun*S - beta*S*(I + Il + Ih + Ii)
+    dE = beta*S*(I + Il + Ih + Ii) - alpha*E - mun*E 
+    dI = alpha*E - mun*I - ph*delta*I - (1-ph)*delta*I
+    dIl = (1-ph)*delta*I - mun*Il - gammar*Il
+    dIh = ph*delta*I - pi*deltai*Ih - (1-pi)*gammah*Ih - mun*Ih
+    dIi = pi*deltai*Ih - mu*deltam*Ii - (1-mu)*gamma_i*Ii - mun*Ii 
+    dR = gammar*Il + (1-pi)*gammah*Ih + (1-mu)*gamma_i*Ii - mun*R
+    dM = mu*deltam*Ii
+    
+    list(c())
+    
+  })
+}
 
+parameters <- c(beta=5, alpha=2.5, delta= 3, ph=0.3, gammar=14, 
+                pi=0.1, di=5, gammah=10, mu=0.4, 
+                gammai=15, deltam=4, nu=4, mun=0.8)
+state <- c(S= 999, E=0, I= 1, Il=0, Ih=0, Ii=1, R=0, M=0)
+t <- seq(0,100,0.01)
+
+#out <- ode(state, t, modelo_covid, parameters)
+
+#matplot(out[,1], out[,2:4], type ="l", xlab = "tiempo", ylab = "Población", main = "Modelo HVB", lwd = 2)
+#legend("topright", c("Suceptibles", "Expuestos", "Infectados", "Infectdos leve", "Infectados hospitalizados", "Infectados intbubados"), col = 1:7, lty = 1:7, cex = 0.5)
+```
 
 
