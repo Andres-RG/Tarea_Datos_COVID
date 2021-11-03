@@ -125,6 +125,27 @@ jpeg("grafica de muertes por rangos de edad.jpeg", width = 750, height = 350)
 grafica_edada_muertes
 dev.off()
 
+# 4. Hacer una gráfica de muertes totales positivos por fecha de inicio de síntomas.
+
+muertes_tot <- select(datos_covid_gto, c(FECHA_SINTOMAS, CLASIFICACION_FINAL, FECHA_DEF))
+deaths_totales <- muertes_tot %>% filter(!is.na(FECHA_DEF))
+deaths_totales <- filter(deaths_totales, CLASIFICACION_FINAL == 1 |
+                           CLASIFICACION_FINAL == 2 |
+                           CLASIFICACION_FINAL == 3)
+
+plot_muertes_totales <- ggplot(deaths_totales, aes(x=FECHA_SINTOMAS)) + 
+  geom_bar(col = "darkorchid4") + 
+  ggtitle("Muertes totales de casos positivos para el estado de Guanajuato") + 
+  labs(x="Tiempo", y="Muertes")  +
+  theme(plot.title = element_text(hjust = 0.5))+
+  theme(panel.background = element_rect(fill = "white"), 
+        axis.line = element_line(colour = "black", size = 1))
+plot_muertes_totales
+
+jpeg("muertes totales.jpeg", width = 750, height = 350)
+plot_muertes_totales
+dev.off()
+
 # 5. Hacer una gráfica apilada de hospitalizados por covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
 
 base_3 <- select(datos_covid_gto, EDAD, FECHA_INGRESO, TIPO_PACIENTE)
