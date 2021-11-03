@@ -1,8 +1,10 @@
 ---
 title: "Tarea Datos COVID"
 author: "Luis Andrés Rojas García Exp. 279465"
-date: "1/11/2021"
-output: html_document
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  html_document:
+    theme: cerulean
 ---
 
 
