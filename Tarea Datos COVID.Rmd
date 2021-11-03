@@ -41,7 +41,11 @@ output:
 
 ### 7. Infiere cuál podría ser el $R_0$ a partir de los datos al inicio de la pandemia.
 
+$$R_0 = \frac{\beta + \alpha + \delta (p_h + (1-p_h)) + p_i \delta _i }{\mu _n + \gamma _r + (1-p_i)\gamma _h + (1-\mu)\gamma _i+\mu\delta _m}$$
+
 ### 8. ¿Cuál es la probabilidad de que individuos positivos a covid sin comorbilidades sean hospitalizados por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
+
+![Probabilidad de hospitalizacion](04_Output/Plots/probabilidad de hospitalizacion.jpeg)
 
 ### 9. ¿Cuál es la probabilidad de que individuos positivos a covid con alguna comorbilidad sean hospitalizados por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
 
@@ -54,6 +58,7 @@ output:
 ### 13. ¿Cuál es la probabilidad de que individuos positivos a covid con alguna comorbilidad fallezcan por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 
 
 ### 14. ¿Qué parámetros podrían modelar las respuestas a las preguntas 8-14 en un modelo por compartimentos?
+
 
 ### 15. Propón un modelo por compartimentos utilizando algunos de los datos, determina sus parámetros y sus ecuaciones diferenciales. Resuélvelo en R.
 
@@ -105,5 +110,9 @@ $$\begin{array}{l}
 \dot R = \gamma _r I_l + (1-p_i) \gamma _h I_h + (1- \mu ) \gamma _i I_i \\ 
 \dot M = \mu \delta m I_i
 \end{array}$$
+
+#### Resolverlas numéricamente
+
+
 
 
