@@ -63,6 +63,13 @@ jpeg("grafica de rangos de edad.jpeg", width = 750, height = 350)
 grafica_rangos_edad
 dev.off()
 
+
+
+
+
+
+
+
 # 2. Hacer una gráfica de casos totales positivos por fecha de inicio de síntomas
 
 sintomas <- select(datos_covid_gto, c(EDAD, FECHA_SINTOMAS, CLASIFICACION_FINAL))
@@ -82,6 +89,13 @@ plot_sintomas
 jpeg("casos positivos totales.jpeg", width = 750, height = 350)
 plot_sintomas
 dev.off()
+
+
+
+
+
+
+
 
 # 3. Hacer una gráfica apilada de muertes por covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
 
@@ -125,6 +139,13 @@ jpeg("grafica de muertes por rangos de edad.jpeg", width = 750, height = 350)
 grafica_edada_muertes
 dev.off()
 
+
+
+
+
+
+
+
 # 4. Hacer una gráfica de muertes totales positivos por fecha de inicio de síntomas.
 
 muertes_tot <- select(datos_covid_gto, c(FECHA_SINTOMAS, CLASIFICACION_FINAL, FECHA_DEF))
@@ -145,6 +166,13 @@ plot_muertes_totales
 jpeg("muertes totales.jpeg", width = 750, height = 350)
 plot_muertes_totales
 dev.off()
+
+
+
+
+
+
+
 
 # 5. Hacer una gráfica apilada de hospitalizados por covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
 
@@ -189,6 +217,13 @@ grafica_hospitalizaciones_edad
 jpeg("grafica de hospitalizaciones por rangos de edad.jpeg", width = 750, height = 350)
 grafica_hospitalizaciones_edad
 dev.off()
+
+
+
+
+
+
+
 
 # 6. Hacer una gráfica de hospitalizados totales positivos por fecha de inicio de síntomas.
 
