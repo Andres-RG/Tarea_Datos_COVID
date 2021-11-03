@@ -72,6 +72,15 @@ Los parámetros de este modelo son:
 - $\mu _n$ : tasa de muerte natural
 
 Las ecuaciones de este sistema son:
-
+$$\begin{array}{l}
+\dot S = \nu - \mu _n S - \beta S (I + I_l + I_h + I_i) \\
+\dot E = \beta S (I + I_l + I_h + I_i) - \alpha E - \mu _n E \\
+\dot I = \alpha E - \mu _n I - p_h \delta I - (1 - p_h) \delta I \\
+\dot I_l = (1 - p_h) \delta I - \mu _n I_l - \gamma _r I_l \\
+\dot I_h =  p_h \delta I - p_i \delta _i I_h - (1-p_i) \gamma _h I_h - \mu _n I_h \\
+\dot I_i = p_i \delta _i I_h - \mu \delta m I_i - (1- \mu ) \gamma _i I_i - \mu _n I_i \\
+\dot R = \gamma _r I_l + (1-p_i) \gamma _h I_h + (1- \mu ) \gamma _i I_i \\ 
+\dot M = \mu \delta m I_i
+\end{array}$$
 
 
