@@ -37,6 +37,8 @@ output:
 
 ### 6. Hacer una gráfica de hospitalizados totales positivos por fecha de inicio de síntomas.
 
+![Plot hospitalizados totales](04_Output/Plots/hospitalizados totales.jpeg)
+
 ### 7. Infiere cuál podría ser el $R_0$ a partir de los datos al inicio de la pandemia.
 
 ### 8. ¿Cuál es la probabilidad de que individuos positivos a covid sin comorbilidades sean hospitalizados por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)? 

@@ -148,8 +148,8 @@ dev.off()
 
 # 5. Hacer una gráfica apilada de hospitalizados por covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
 
-base_3 <- select(datos_covid_gto, EDAD, FECHA_INGRESO, TIPO_PACIENTE)
-base_3 <- filter(base_3, TIPO_PACIENTE == 2)
+base_3 <- select(datos_covid_gto, EDAD, FECHA_INGRESO, TIPO_PACIENTE, CLASIFICACION_FINAL)
+base_3 <- filter(base_3, TIPO_PACIENTE == 2, CLASIFICACION_FINAL == 1 | CLASIFICACION_FINAL == 3)
 
 edades_h_18_29 <- filter(base_3, EDAD >= 18 & EDAD <= 29)
 edades_h_18_29 <- mutate(edades_h_18_29, rango_edad = "18-29")
@@ -188,4 +188,22 @@ grafica_hospitalizaciones_edad
 
 jpeg("grafica de hospitalizaciones por rangos de edad.jpeg", width = 750, height = 350)
 grafica_hospitalizaciones_edad
+dev.off()
+
+# 6. Hacer una gráfica de hospitalizados totales positivos por fecha de inicio de síntomas.
+
+ht <- select(datos_covid_gto, c(FECHA_SINTOMAS, CLASIFICACION_FINAL, TIPO_PACIENTE))
+ht <- filter(ht, TIPO_PACIENTE == 2, CLASIFICACION_FINAL == 1 | CLASIFICACION_FINAL == 2 |CLASIFICACION_FINAL == 3)
+
+hospitalizados_totales <- ggplot(ht, aes(x=FECHA_SINTOMAS)) + 
+  geom_bar(col = "turquoise3") + 
+  ggtitle("Hospitalizaciones totales de casos positivos para el estado de Guanajuato") + 
+  labs(x="Tiempo", y="Hospitalizados")  +
+  theme(plot.title = element_text(hjust = 0.5))+
+  theme(panel.background = element_rect(fill = "white"), 
+        axis.line = element_line(colour = "black", size = 1))
+hospitalizados_totales
+
+jpeg("hospitalizados totales.jpeg", width = 750, height = 350)
+hospitalizados_totales
 dev.off()
