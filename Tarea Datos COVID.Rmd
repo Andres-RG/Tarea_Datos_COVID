@@ -1,10 +1,8 @@
 ---
 title: "Tarea Datos COVID"
 author: "Luis Andrés Rojas García Exp. 279465"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: 
-  html_document:
-    theme: cerulean
+date: "1/11/2021"
+output: html_document
 ---
 
 
@@ -44,4 +42,36 @@ output:
 
 15. Propón un modelo por compartimentos utilizando algunos de los datos, determina sus parámetros y sus ecuaciones diferenciales. Resuélvelo en R.
 
++ Supuestos: 
+
+- Se asumen parámetros demográficos
+- La infección ocurre por interacciones con individuos infectados leves, hospitalizados e intubados
+- La tasa de infección es la misma para las diferentes interacciones
+- No hay heterogeneidad en los individuos suceptibles
+- La muerte por enfermedad es una variable
+
 ![Diagrama de compartimentos](diagrama_compartimentos_COVID.png)
+
+Los parámetros de este modelo son:
+
+- $\beta$ : tasa de infección 
+- $\alpha$ : días en que los expuestos presentan síntomas
+- $\delta$ : días en que un infectado se vuelve infectado leve o es hospitalizado
+- $p_h$ : fracción de individuos infectados que son hospitalizados
+- $(1-p_h)$ : resto de individuos infectados que no son hospitalizados, son infectados leves
+- $\gamma _r$ : días de recuperación de infectados leves
+- $p_i$ : fracción de individuos hospitalizados que son intubados
+- $(1-p_i)$ : resto de individuos hospitalizados que no son intubados, se recuperan
+- $\delta _i$ : días en que un individuo hospitalizado es intubado
+- $\gamma _h$ : días en que un individuo hospitalizado se recupera
+- $\mu$ : fracción de individuos intubados que mueren
+- $(1- \mu )$ : resto de individuos intubados que no mueren, se recuperan
+- $\gamma _i$ : días en que un individuo intubado se recupera
+- $\delta _m$ : días en que un individuo intubado muere 
+- $\nu$ : tasa de nacimientos
+- $\mu _n$ : tasa de muerte natural
+
+Las ecuaciones de este sistema son:
+
+
+
