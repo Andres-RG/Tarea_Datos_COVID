@@ -1,5 +1,7 @@
 library(ggplot2)
 library(tidyverse)
+library(viridisLite)
+library(viridis)
 
 
 #1 Hacer una gráfica apilada de casos positivos a covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
@@ -61,6 +63,25 @@ jpeg("grafica de rangos de edad.jpeg", width = 750, height = 350)
 grafica_rangos_edad
 dev.off()
 
+# 2. Hacer una gráfica de casos totales positivos por fecha de inicio de síntomas
+
+sintomas <- select(datos_covid_gto, c(EDAD, FECHA_SINTOMAS, CLASIFICACION_FINAL))
+sintomas <- filter(sintomas, CLASIFICACION_FINAL == 1 |
+                     CLASIFICACION_FINAL == 2 |
+                     CLASIFICACION_FINAL == 3 )
+
+plot_sintomas <- ggplot(sintomas, aes(x=FECHA_SINTOMAS)) + 
+  geom_bar( col = "royalblue3") + 
+  ggtitle("Casos positivos a COVID totales para el estado de Guanajuato") + 
+  labs(x="Tiempo", y="Casos")  +
+  theme(plot.title = element_text(hjust = 0.5))+
+  theme(panel.background = element_rect(fill = "white"), 
+        axis.line = element_line(colour = "black", size = 1))
+plot_sintomas
+
+jpeg("casos positivos totales.jpeg", width = 750, height = 350)
+plot_sintomas
+dev.off()
 
 # 3. Hacer una gráfica apilada de muertes por covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
 
