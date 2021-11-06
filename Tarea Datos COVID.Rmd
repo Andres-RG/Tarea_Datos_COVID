@@ -10,6 +10,9 @@ output:
     toc: true
 ---
 
+```{r}
+library(deSolve)
+```
 
 ### 1. Hacer una gráfica apilada de casos positivos a covid por rangos de edades en adultos (18-29,30-39,40-49,50-59,60-70, 70+)
 
@@ -111,25 +114,25 @@ modelo_covid <- function (t, state, parameters){
     dI = alpha*E - mun*I - ph*delta*I - (1-ph)*delta*I
     dIl = (1-ph)*delta*I - mun*Il - gammar*Il
     dIh = ph*delta*I - pi*deltai*Ih - (1-pi)*gammah*Ih - mun*Ih
-    dIi = pi*deltai*Ih - mu*deltam*Ii - (1-mu)*gamma_i*Ii - mun*Ii 
-    dR = gammar*Il + (1-pi)*gammah*Ih + (1-mu)*gamma_i*Ii - mun*R
+    dIi = pi*deltai*Ih - mu*deltam*Ii - (1-mu)*gammai*Ii - mun*Ii 
+    dR = gammar*Il + (1-pi)*gammah*Ih + (1-mu)*gammai*Ii - mun*R
     dM = mu*deltam*Ii
     
-    list(c())
+    list(c(dS,dE,dI,dIl,dIh,dIi,dR,dM))
     
   })
 }
 
 parameters <- c(beta=5, alpha=2.5, delta= 3, ph=0.3, gammar=14, 
                 pi=0.1, di=5, gammah=10, mu=0.4, 
-                gammai=15, deltam=4, nu=4, mun=0.8)
+                gammai=15, deltam=4, nu=4, mun=0.8, deltai=4, gammai=5)
 state <- c(S= 999, E=0, I= 1, Il=0, Ih=0, Ii=1, R=0, M=0)
 t <- seq(0,100,0.01)
 
-#out <- ode(state, t, modelo_covid, parameters)
+out <- ode(state, t, modelo_covid, parameters)
 
-#matplot(out[,1], out[,2:4], type ="l", xlab = "tiempo", ylab = "Población", main = "Modelo HVB", lwd = 2)
-#legend("topright", c("Suceptibles", "Expuestos", "Infectados", "Infectdos leve", "Infectados hospitalizados", "Infectados intbubados"), col = 1:7, lty = 1:7, cex = 0.5)
+matplot(out[,1], out[,2:4], type ="l", xlab = "tiempo", ylab = "Población", main = "Modelo COVID para el Estado de Guanajuato", lwd = 2)
+legend("topright", c("Suceptibles", "Expuestos", "Infectados", "Infectdos leve", "Infectados hospitalizados", "Infectados intbubados"), col = 1:7, lty = 1:7, cex = 0.5)
 ```
 
 
